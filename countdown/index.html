@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Countdown Widget</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:#F5EDE9;
+    font-family:Arial,sans-serif;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+    text-align:center;
+}
+
+h2{
+    color:#703B3B;
+    margin-bottom:20px;
+}
+
+#countdown{
+    font-size:32px;
+    font-weight:bold;
+    color:#703B3B;
+}
+
+p{
+    margin-top:10px;
+    color:#777;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+<h2>🎉 New Year 2027</h2>
+
+<div id="countdown"></div>
+
+<p>Hitung mundur menuju Tahun Baru</p>
+
+</div>
+
+<script>
+
+const targetDate = new Date("January 1, 2027 00:00:00").getTime();
+
+function updateCountdown(){
+
+    const now = new Date().getTime();
+
+    const distance = targetDate - now;
+
+    const days = Math.floor(distance / (1000*60*60*24));
+
+    const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+
+    const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+
+    const seconds = Math.floor((distance%(1000*60))/1000);
+
+    document.getElementById("countdown").innerHTML=
+    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+}
+
+updateCountdown();
+
+setInterval(updateCountdown,1000);
+
+</script>
+
+</body>
+</html>
