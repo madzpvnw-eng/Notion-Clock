@@ -1,50 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Jam Gagasan</title>
+
+<style>
+body{
+    margin:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:#FFFFFF;
+    color:#703B3B;
+    font-family:Arial,sans-serif;
+}
+
+.clock{
+    text-align:center;
+}
+
+#time{
+    font-size:64px;
+    font-weight:bold;
+    color:#703B3B;
+}
+
+#date{
+    margin-top:10px;
+    color:#703B3B;
+    font-size:18px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="clock">
+    <div id="time"></div>
+    <div id="date"></div>
+</div>
+
 <script>
-
-const clock = document.getElementById("clock");
-const date = document.getElementById("date");
-
-const hari = [
-"Minggu",
-"Senin",
-"Selasa",
-"Rabu",
-"Kamis",
-"Jumat",
-"Sabtu"
-];
-
-const bulan = [
-"Januari",
-"Februari",
-"Maret",
-"April",
-"Mei",
-"Juni",
-"Juli",
-"Agustus",
-"September",
-"Oktober",
-"November",
-"Desember"
-];
-
 function updateClock(){
+    const now = new Date();
 
-const now = new Date();
+    document.getElementById("time").textContent =
+        now.toLocaleTimeString("id-ID",{
+            hour:'2-digit',
+            minute:'2-digit',
+            second:'2-digit'
+        });
 
-const jam = String(now.getHours()).padStart(2,"0");
-const menit = String(now.getMinutes()).padStart(2,"0");
-const detik = String(now.getSeconds()).padStart(2,"0");
-
-clock.innerHTML = `${jam}.${menit}.${detik}`;
-
-date.innerHTML =
-`${hari[now.getDay()]}, ${now.getDate()} ${bulan[now.getMonth()]} ${now.getFullYear()}`;
-
+    document.getElementById("date").textContent =
+        now.toLocaleDateString("id-ID",{
+            weekday:"long",
+            day:"numeric",
+            month:"long",
+            year:"numeric"
+        });
 }
 
 updateClock();
-
 setInterval(updateClock,1000);
-
 </script>
+
+</body>
+</html>
