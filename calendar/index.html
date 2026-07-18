@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendar Widget</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:#F5EDE9;
+    font-family:Arial,sans-serif;
+}
+
+.calendar{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    width:320px;
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+
+.header{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+    color:#703B3B;
+    margin-bottom:15px;
+}
+
+.weekdays,
+.days{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    text-align:center;
+}
+
+.weekdays div{
+    font-weight:bold;
+    padding:8px 0;
+    color:#703B3B;
+}
+
+.days div{
+    padding:12px 0;
+}
+
+.today{
+    background:#703B3B;
+    color:white;
+    border-radius:50%;
+    width:36px;
+    height:36px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:auto;
+}
+
+</style>
+</head>
+<body>
+
+<div class="calendar">
+
+<div class="header" id="monthYear"></div>
+
+<div class="weekdays">
+<div>Min</div>
+<div>Sen</div>
+<div>Sel</div>
+<div>Rab</div>
+<div>Kam</div>
+<div>Jum</div>
+<div>Sab</div>
+</div>
+
+<div class="days" id="days"></div>
+
+</div>
+
+<script>
+
+const monthYear=document.getElementById("monthYear");
+const days=document.getElementById("days");
+
+const months=[
+"Januari","Februari","Maret","April","Mei","Juni",
+"Juli","Agustus","September","Oktober","November","Desember"
+];
+
+const today=new Date();
+
+const year=today.getFullYear();
+const month=today.getMonth();
+const date=today.getDate();
+
+monthYear.innerHTML=`${months[month]} ${year}`;
+
+const firstDay=new Date(year,month,1).getDay();
+const lastDate=new Date(year,month+1,0).getDate();
+
+for(let i=0;i<firstDay;i++){
+    days.innerHTML+="<div></div>";
+}
+
+for(let i=1;i<=lastDate;i++){
+
+    if(i===date){
+
+        days.innerHTML+=`<div class="today">${i}</div>`;
+
+    }else{
+
+        days.innerHTML+=`<div>${i}</div>`;
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
