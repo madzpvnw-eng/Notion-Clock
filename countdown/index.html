@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Countdown Widget</title>
 
 <style>
@@ -14,50 +15,136 @@
 }
 
 body{
+
     display:flex;
     justify-content:center;
     align-items:center;
     height:100vh;
-    background:#F5EDE9;
+
+    background:#ffffff;
+
     font-family:Arial,sans-serif;
+
 }
 
-.card{
-    background:white;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,.1);
+.container{
+
     text-align:center;
+
 }
 
-h2{
+h1{
+
     color:#703B3B;
-    margin-bottom:20px;
+    margin-bottom:30px;
+    letter-spacing:3px;
+    font-size:34px;
+
 }
 
-#countdown{
-    font-size:32px;
+.countdown{
+
+    display:flex;
+    gap:20px;
+    justify-content:center;
+
+}
+
+.box{
+
+    width:100px;
+
+}
+
+.number{
+
+    background:#F5EDE9;
+
+    color:#703B3B;
+
+    font-size:42px;
+
     font-weight:bold;
-    color:#703B3B;
+
+    border-radius:18px;
+
+    height:95px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    position:relative;
+
 }
 
-p{
-    margin-top:10px;
-    color:#777;
+.number::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    top:50%;
+
+    border-top:2px solid rgba(112,59,59,.15);
+
+}
+
+.label{
+
+    margin-top:12px;
+
+    color:#703B3B;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
 }
 
 </style>
 
 </head>
+
 <body>
 
-<div class="card">
+<div class="container">
 
-<h2>🎉 New Year 2027</h2>
+<h1>COMING SOON</h1>
 
-<div id="countdown"></div>
+<div class="countdown">
 
-<p>Hitung mundur menuju Tahun Baru</p>
+<div class="box">
+<div class="number" id="days">00</div>
+<div class="label">DAYS</div>
+</div>
+
+<div class="box">
+<div class="number" id="hours">00</div>
+<div class="label">HOURS</div>
+</div>
+
+<div class="box">
+<div class="number" id="minutes">00</div>
+<div class="label">MINUTES</div>
+</div>
+
+<div class="box">
+<div class="number" id="seconds">00</div>
+<div class="label">SECONDS</div>
+</div>
+
+</div>
 
 </div>
 
@@ -71,7 +158,7 @@ function updateCountdown(){
 
     const distance = targetDate - now;
 
-    const days = Math.floor(distance / (1000*60*60*24));
+    const days = Math.floor(distance/(1000*60*60*24));
 
     const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
 
@@ -79,8 +166,17 @@ function updateCountdown(){
 
     const seconds = Math.floor((distance%(1000*60))/1000);
 
-    document.getElementById("countdown").innerHTML=
-    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    document.getElementById("days").textContent =
+    String(days).padStart(2,"0");
+
+    document.getElementById("hours").textContent =
+    String(hours).padStart(2,"0");
+
+    document.getElementById("minutes").textContent =
+    String(minutes).padStart(2,"0");
+
+    document.getElementById("seconds").textContent =
+    String(seconds).padStart(2,"0");
 
 }
 
